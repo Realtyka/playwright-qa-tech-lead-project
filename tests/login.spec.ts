@@ -6,11 +6,11 @@ test.describe('Login tests', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    page.goto('/login');
+    page.goto('https://bolt.stagerealbrokerage.com/login');
   });
 
   test('should login successfully', async ({ page }) => {
-    await loginPage.login('testuser@example.com', 'Password123!');
+    await loginPage.login('testuser1234@test.com', 'P@ssw0rd1234');
     await expect(page).toHaveURL(/dashboard/);
   });
 
@@ -33,5 +33,11 @@ test.describe('Login tests', () => {
     await loginPage.login(' ', ' ');
     await expect(loginPage.usernameError).toBeVisible();
     await expect(loginPage.passwordError).toBeVisible();
+  });
+
+  // part 3 starter
+  test('Validate transaction participants', async ({ page }) => {
+    await page.getByRole('cell', { name: 'view' }).first().click();
+    await page.getByRole('link', { name: 'Details' }).click();
   });
 });
